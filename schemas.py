@@ -6,17 +6,14 @@ class ResponseSchema(BaseModel):
     message: str
 
 
-class CategorySchema(BaseModel):
-    id: Optional[int]
+class BaseCategorySchema(BaseModel):
     name: str
-    slug: Optional[str]
 
-    class Config:
-        schema_extra = {
-            "test": {
-                "name": "test name"
-            }
-        }
+
+
+class CategorySchemaOut(BaseCategorySchema):
+    id: int
+    slug: str
 
 
 class ProductSchema(BaseModel):
@@ -27,7 +24,7 @@ class ProductSchema(BaseModel):
     categories_id: int
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "test": {
                 "name": "test product name",
                 "description": "test product description",
